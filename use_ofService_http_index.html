@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="questApp">
+  <head>
+    <meta charset="utf-8">
+    <title>HTTP</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    
+    <!-- Add custom CSS here -->    
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+  </head>
+
+  <body style="background-color:#2d1111">   
+  
+    <!-- Full Page Image Header Area -->
+    <div id="top" class="header" style="margin-left: 50px;
+    margin-right: 50px;">
+      <div class="col-xs-12 col-md-5 col-md-offset-4 col-sm-12">
+        <div class="submitted">
+          <div  ng-controller="QuestionHTTPController">
+            <button type="button" class="btn" ng-click="load()">Загрузить</button>
+            <!--блок с данными теперь перемешен в отдельный элемент div, видимостью которого управляет объект loaded-->
+            <div class="content"  ng-show="loaded">
+              <div class="quest">
+                <h3>{{question.text}}</h3>
+                <p>{{question.author}} </p> <p><i>{{question.date}}</i></p>
+              </div>
+              <h3>Ответы</h3>
+              <div class="answers">
+                <div ng-repeat="answer in question.answers | orderBy:sortparam" class="answer">
+                <div class="vote">
+                    <a class="vote-up" ng-click="voteUp(answer)"></a>
+                    <span class="rate">{{answer.rate}}</span>
+                    <a class="vote-down" ng-click="voteDown(answer)"></a>
+                </div>
+                <b>{{answer.text}}</b>
+                <p>{{answer.author}}</p>
+                <p><i>{{answer.date}}</i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Full Page Image Header Area --> 
+
+    <!-- JavaScript -->
+    <script src="js/for_servises/lib/angular.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>        
+    <script src="js/nicescroll.min.js"></script><!-- jquery nice scroll--> 
+    <script src="js/pace.min.js" ></script> <!--page load progress bar-->
+    <script src="js/for_servises/app.js"></script> <!--получаем
+ ранее созданный модуль (angular.module('questApp'))-То есть наше приложение будет называться questApp-->
+    <script src="js/for_http/controllers/QuestionHTTPController.js"></script>
+    <script src="js/for_servises/questionService.js"></script>    
+
+  </body>
+</html>
